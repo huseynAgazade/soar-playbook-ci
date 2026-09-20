@@ -194,6 +194,16 @@ yours rather than adopting mine.
 credential-shaped string in them is fabricated and authenticates nowhere** — they exist so
 the scanner has something to find and so its false positives are visible.
 
+## How this was built
+
+Written with an AI coding assistant. The two-layer scan design came from a specific
+observation about where regex credential scanning fails: `\bpassword\b` never matches
+`SERVICE_PASSWORD` or `DB_PASSWORD`, because underscore is a word character — and a JWT
+assembled across four source lines contains no single matching line. The AI layer exists
+to cover exactly those blind spots, and the fixtures in `examples/` demonstrate both.
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
